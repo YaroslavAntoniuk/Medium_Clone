@@ -16,6 +16,9 @@ export class UserEntity {
   image: string;
 
   @Column()
+  username: string;
+
+  @Column()
   password: string;
 
   @BeforeInsert()
