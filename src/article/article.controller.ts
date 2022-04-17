@@ -11,6 +11,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -18,10 +19,20 @@ import {
 import { DeleteResult } from 'typeorm';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { IArticleResponse } from './types/articleResponse.interface';
+import { IArticlesResponse } from './types/articlesResponse.interface';
 
 @Controller('api/articles')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
+
+  @Get()
+  async findAll(
+    @User('id') currentUserId: number,
+    @Query() query: any,
+  ): Promise<IArticlesResponse> {
+    return await this.articleService.findAll(currentUserId, query);
+  }
+
   @Post()
   @UseGuards(AuthGuard)
   @UsePipes(new ValidationPipe())
