@@ -1,6 +1,7 @@
 import { JWT_SECRET } from '@app/config';
 import { CreateUserDto } from '@app/user/dto/create-user.dto';
 import { LoginUserDto } from '@app/user/dto/login-user.dto';
+import { UpdateUserDto } from '@app/user/dto/update-user.dto';
 import { IUserResponse } from '@app/user/types/userResponse.interface';
 import { UserEntity } from '@app/user/user.entity';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
@@ -91,5 +92,15 @@ export class UserService {
 
   findById(id: number): Promise<UserEntity> {
     return this.userRepository.findOne(id);
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const user = await this.findById(userId);
+    Object.assign(user, updateUserDto);
+
+    return await this.userRepository.save(user);
   }
 }
