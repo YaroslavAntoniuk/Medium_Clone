@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
     "mediumclone",
+    "middlewares",
     "nestjs",
+    "ormconfig",
     "typeorm"
   ]
 }

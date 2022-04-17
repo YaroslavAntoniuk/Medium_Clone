@@ -1,3 +1,4 @@
+import { IExpressRequest } from '@app/types/expressRequest.interface';
 import { CreateUserDto } from '@app/user/dto/create-user.dto';
 import { LoginUserDto } from '@app/user/dto/login-user.dto';
 import { IUserResponse } from '@app/user/types/userResponse.interface';
@@ -5,7 +6,9 @@ import { UserService } from '@app/user/user.service';
 import {
   Body,
   Controller,
+  Get,
   Post,
+  Req,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -32,5 +35,10 @@ export class UserController {
     const user = await this.userService.login(loginUserDto);
 
     return this.userService.mapUserResponse(user);
+  }
+
+  @Get('user')
+  async currentUser(@Req() req: IExpressRequest): Promise<IUserResponse> {
+    return this.userService.mapUserResponse(req.user);
   }
 }
