@@ -3,7 +3,7 @@ import { CreateArticleDto } from '@app/article/dto/create-article.dto';
 import { User } from '@app/user/decorators/user.decorator';
 import { AuthGuard } from '@app/user/guards/auth.guard';
 import { UserEntity } from '@app/user/user.entity';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { IArticleResponse } from './types/articleResponse.interface';
 
 @Controller('api/articles')
@@ -19,6 +19,13 @@ export class ArticleController {
       currentUser,
       createArticleDto,
     );
+
+    return this.articleService.mapArticleResponse(article);
+  }
+
+  @Get(':slug')
+  async getArticle(@Param('slug') slug: string): Promise<IArticleResponse> {
+    const article = await this.articleService.getArticleBySlug(slug);
 
     return this.articleService.mapArticleResponse(article);
   }
