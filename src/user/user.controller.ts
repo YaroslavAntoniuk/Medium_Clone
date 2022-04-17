@@ -1,14 +1,14 @@
-import { IExpressRequest } from '@app/types/expressRequest.interface';
+import { User } from '@app/user/decorators/user.decorator';
 import { CreateUserDto } from '@app/user/dto/create-user.dto';
 import { LoginUserDto } from '@app/user/dto/login-user.dto';
 import { IUserResponse } from '@app/user/types/userResponse.interface';
+import { UserEntity } from '@app/user/user.entity';
 import { UserService } from '@app/user/user.service';
 import {
   Body,
   Controller,
   Get,
   Post,
-  Req,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -38,7 +38,7 @@ export class UserController {
   }
 
   @Get('user')
-  async currentUser(@Req() req: IExpressRequest): Promise<IUserResponse> {
-    return this.userService.mapUserResponse(req.user);
+  async currentUser(@User() user: UserEntity): Promise<IUserResponse> {
+    return this.userService.mapUserResponse(user);
   }
 }
