@@ -5,6 +5,8 @@
     "middlewares",
     "nestjs",
     "ormconfig",
-    "typeorm"
+    "ormseedconfig",
+    "typeorm",
+    "Yaroslav"
   ]
 }
