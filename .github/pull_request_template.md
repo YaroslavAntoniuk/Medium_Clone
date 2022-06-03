@@ -1,13 +1,5 @@
 Which part of system was modified?
-
-	- [ts-backend]
-	- [ts-frontend]
-	- [wl]
-	- [core]
-	- [api]
-	- [back-office]
-	- [sync]
-	- [gyg-api]
+ - part of the system
 
 What are the relevant tickets?
  - link to clickUp task
