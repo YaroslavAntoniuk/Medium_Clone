@@ -11,3 +11,8 @@ export class FollowEntity {
   @Column()
   followingId: number;
 }
+
+const test = [];
+console.log('test');
+
+
